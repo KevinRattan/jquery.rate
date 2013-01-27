@@ -1,6 +1,6 @@
 ﻿/*!
 * jQuery Rate Plugin
-* version: 1.4 (27-JAN-2013)
+* version: 1.4.1 (27-JAN-2013)
 * @requires jQuery v1.7 or later
 * optionally utilizes the metadata plugin
 *
@@ -15,6 +15,7 @@
                      e.g. using values of inputs rather than name 
                      - allows plugin to work with Web 
 * changes from 1.3 - updated to work with jquery v1.9 + minor refactoring for cleaner code
+* changes from 1.4 - refactored for cleaner code
 */
 
 ; (function ($) {
@@ -60,12 +61,9 @@
             $this.on("click", "img", function (e) {
                 //work around  for browser bug/features where multiple radio buttons can have 
                 //checked property set to checked if they are not visible 
-                $('input:radio', $this).removeAttr('checked');
+                $('input:radio', $this).prop(false);  //clear all existing, since browser doesn't
                 var s = parseFloat($(this).prop("alt"));
-                // as of 1.9, have to set both attr or prop or it does not work - attr will change image and appears to 
-                //update DOM, but value is not added when form is submitted.  Prop does NOT work with images, but does
-                //update the DOM.
-                $('input:radio[value=' + s + ']', $this).attr('checked', 'checked').prop('checked', true);
+                $('input:radio[value=' + s + ']', $this).prop('checked', true);
                 setRatings(s, $this, zeroImage, oneImage);
             }).on("mouseover mouseout", "img", function () {
                 setRatings(parseFloat($(this).prop("alt")), $this, zeroImage, oneImage);
