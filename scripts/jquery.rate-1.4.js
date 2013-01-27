@@ -15,7 +15,6 @@
                      e.g. using values of inputs rather than name 
                      - allows plugin to work with Web 
 * changes from 1.3 - updated to work with jquery v1.9 + minor refactoring for cleaner code
-
 */
 
 ; (function ($) {
